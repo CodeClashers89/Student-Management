@@ -17,16 +17,8 @@ class CustomUser(AbstractUser):
 
 #Student models
 class Student(models.Model):
-    subject_list = [
-        ('Computer Programming','CP'),
-        ('Machine Learning', 'ML'),
-        ('Data Science','DS'),
-        ('App Developement','AP'),
-        ('Web Developement','WD'),
-    ]
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name="student_profile")
     enrollemet_no = models.CharField(max_length=11, unique=True , editable=False)
-    subjects = models.CharField(max_length=50,choices=subject_list,default='CP')
     date_of_birth = models.DateField(blank=False,null=False)
     gender = models.TextField(max_length=10 ,blank=False,null=False, choices = [('MALE' , 'Male'),('FEMALE' , 'Female')] )
     address = models.TextField(blank=False,null=False)
@@ -44,7 +36,10 @@ class Student(models.Model):
     creadted_at = models.DateTimeField(auto_now=True)
     photo_student = models.ImageField(blank=True,null = True,upload_to='sp/')
     leaving_certificate = models.FileField(upload_to = "lc/",blank=False,null=False)
-    attendence = models.IntegerField()
+    attendence = models.IntegerField(default=0)
+    semester = models.IntegerField(default=1)
+    spi = models.DecimalField(decimal_places=2, max_digits=4, default=0)
+    cpi = models.DecimalField(decimal_places=2, max_digits=4,default=0)
 
     def save(self, *args, **kwargs):
         if not self.enrollemet_no:
@@ -60,17 +55,11 @@ class Student(models.Model):
     def __str__(self):
         return f'{self.name} -  {self.enrollemet_no}'
     
+
+    
 #faculty model
 class Faculty(models.Model):
-    subject_list = [
-        ('Computer Programming','CP'),
-        ('Machine Learning', 'ML'),
-        ('Data Science','DS'),
-        ('App Developement','AP'),
-        ('Web Developement','WD'),
-    ]
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name="faculty_profile")
-    subjects = models.CharField(max_length=50,choices=subject_list)
     salary = models.IntegerField(blank=False,null=False)
     faculty_id = models.CharField(max_length=11, unique=True , editable=False)
     gender = models.TextField(max_length=10 ,blank=False,null=False, choices = [('MALE' , 'Male'),('FEMALE' , 'Female')] )
@@ -104,6 +93,15 @@ class Faculty(models.Model):
     def __str__(self):
         return f'{self.name} -  {self.faculty_id}'
     
+class Subjects(models.Model):
+    faculty = models.OneToOneField(Faculty, on_delete=models.DO_NOTHING)
+    student = models.ForeignKey(Student, on_delete=models.DO_NOTHING)
+    scredits = models.DecimalField(decimal_places=1, max_digits=4)
+    name = models.CharField(max_length = 20, null=False, blank=False)
+    details = models.CharField(max_length=150)
+    subject_code = models.CharField(max_length=15,null=True)
+
+    
 #Test and Exam Models
 class TestExam(models.Model):
     creator = models.ForeignKey(Faculty, on_delete=models.CASCADE,related_name='test_creator')
@@ -115,12 +113,6 @@ class TestExam(models.Model):
     duration = models.IntegerField(null=False, blank=False)
     te_type = models.CharField(choices=[('Test', 'test'),('Exam', 'exam')], null=False, blank=False,max_length=5,verbose_name='type')
     test_id = models.IntegerField(null=False, blank=False)
-    
-
-    def get_subjects(self):
-        return Faculty.objects.filter(
-            te_fsubjects = self.creator.subjects,
-        )
 
     def get_students(self):
 
@@ -143,3 +135,11 @@ class TestExam(models.Model):
     
     class Meta:
         ordering = ['-test_date']
+
+class Result(models.Model):
+    test = models.OneToOneField(TestExam, on_delete=models.CASCADE)
+    obtained_marks = models.IntegerField()
+    studentr = models.ForeignKey(Student, on_delete=models.CASCADE)
+
+    
+    
