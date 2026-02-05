@@ -1,99 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create new test</title>
-</head>
-<style>
+{% extends "base.html" %}
 
-h1{
-    text-align: center;
-}
-    /* From Uiverse.io by SteveBloX */ 
-.card {
-  --bg: #f1f1f1;
-  --contrast: #f9f9f9;
-  --grey: #d9d9d9;
-  position: relative;
-  padding: 12px;
-  background-color: var(--bg);
-  border-radius: 20px;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 20px -10px;
-}
+{% block title %}SMS{% endblock %}
 
-.card-overlay {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: repeating-linear-gradient(45deg, var(--bg), var(--grey) 20px);
-  filter: opacity(15%);
-}
 
-.card-inner {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  width: 180px;
-  height: 240px;
-  background-color: var(--contrast);
-  border-radius: 25px;
-  /* Content style */
-  font-size: 26px;
-  font-weight: 700;
-  color: #555;
-  text-align: center;
-  font-family: Arial, sans-serif;
-}
 
-</style>
-<body>
-    <div class="card">
-        <div class="container">
-            <h2>Exam Details</h2><hr><br>
-            <lable for="Test date">Test Date:</lable>
-            <input type="date" id="Test date" name="Test date">
+{% block content %}
 
-            <br>
-            <br>
-            
-            <lable for="dd">Department:</lable>
-            <select name="dd" id="dd">
-                <option value="computer">Computer</option>
-                <option value="english">English</option>
-                <option value="maths">Maths</option>
-                <option value="gujarati">Gujarati</option>
-            </select>
+ <h1>Welcome to my website!</h1>
+  <p>This is a child template.</p>
 
-            <br>
-            <br>
 
-            <lable for="syl">Syllabus:</lable>
-            <textarea id="syl" name="stl"></textarea>
-
-            <br>
-            <br>
-
-            <lable for="tmarks">Total Marks:</lable>
-            <input type="text" id="tmarks" name="tmarks">
-
-            <br>
-            <br>
-
-            <lable for="time">Duration:</lable>
-            <input type="time" id="time" name="time">
-
-            <br>
-            <br>
-
-            <input type="radio" id="exam" name="exam" value="EXAM">
-            <lable for="exam">EXAM</lable>
-            <input type="radio" id="test" name="test" value="TEST">
-            <lable for="test">TEST</lable>
-        </div>
-        
-    </div>
-    
-</body>
-</html>
+{% endblock %}
