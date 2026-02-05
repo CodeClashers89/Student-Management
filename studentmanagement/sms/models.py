@@ -44,6 +44,7 @@ class Student(models.Model):
     creadted_at = models.DateTimeField(auto_now=True)
     photo_student = models.ImageField(blank=True,null = True,upload_to='sp/')
     leaving_certificate = models.FileField(upload_to = "lc/",blank=False,null=False)
+    attendence = models.IntegerField()
 
     def save(self, *args, **kwargs):
         if not self.enrollemet_no:
@@ -58,8 +59,8 @@ class Student(models.Model):
 
     def __str__(self):
         return f'{self.name} -  {self.enrollemet_no}'
-#feculty model
-
+    
+#faculty model
 class Faculty(models.Model):
     subject_list = [
         ('Computer Programming','CP'),
@@ -82,6 +83,13 @@ class Faculty(models.Model):
     creadted_at = models.DateTimeField(auto_now=True)
     department = models.CharField(max_length=15,null=False,blank=False,choices=[('COMPUTER' , 'Computer') , ('CIVIL', 'Civil'), ('MECHANICAL' , 'Mechanical') ,('ELECTRICAL' ,'Electrical')])
 
+    def get_students(self):
+
+        return Student.objects.filter(
+            department = self.department,
+            te_ssubjects = self.en_student.subjects,
+        )
+
     def save(self, *args, **kwargs):
         if not self.faculty_id:
             last_faculty = Faculty.objects.all().order_by('id').last()
@@ -100,7 +108,7 @@ class Faculty(models.Model):
 class TestExam(models.Model):
     creator = models.ForeignKey(Faculty, on_delete=models.CASCADE,related_name='test_creator')
     en_student = models.ManyToManyField(Student,related_name='enrolled_student')
-    department = models.CharField(max_length=15, choices=[('COMPUTER' , 'Computer') , ('CIVIL', 'Civil'), ('MECHANICAL' , 'Mechanical') ,('ELECTRICAL' ,'Electrical')], null=False, blank=False)
+    department = models.CharField(max_length=15,choices=[('COMPUTER' , 'Computer') , ('CIVIL', 'Civil'), ('MECHANICAL' , 'Mechanical') ,('ELECTRICAL' ,'Electrical')], null=False, blank=False)
     test_date = models.DateTimeField()
     syllabus = models.TextField(blank = False, null=False)
     total_marks = models.IntegerField(null=False, blank=False)
@@ -108,18 +116,6 @@ class TestExam(models.Model):
     te_type = models.CharField(choices=[('Test', 'test'),('Exam', 'exam')], null=False, blank=False,max_length=5,verbose_name='type')
     test_id = models.IntegerField(null=False, blank=False)
     
-
-
-    def save(self, *args, **kwargs):
-        if not self.test_id:
-            last_test = TestExam.objects.all().order_by('id').last()
-            if last_test:
-                last_id = int(last_test.test_id)
-                new_id = last_id + 1
-            else:
-                new_id = 1
-            self.test_id = f'{new_id:05d}'
-        super().save(*args, **kwargs)
 
     def get_subjects(self):
         return Faculty.objects.filter(
@@ -132,4 +128,18 @@ class TestExam(models.Model):
             department = self.department,
             te_ssubjects = self.en_student.subjects,
         )
+
+    def save(self, *args, **kwargs):
+        if not self.test_id:
+            last_test = TestExam.objects.all().order_by('id').last()
+            if last_test:
+                last_id = int(last_test.test_id)
+                new_id = last_id + 1
+            else:
+                new_id = 1
+            self.test_id = f'{new_id:05d}'
+        super().save(*args, **kwargs)
+
     
+    class Meta:
+        ordering = ['-test_date']
