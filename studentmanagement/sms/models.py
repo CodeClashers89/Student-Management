@@ -52,4 +52,24 @@ class Student(models.Model):
         return f'{self.name} -  {self.enrollemet_no}'
 #feculty model
 
-
+class Faculty(models.Model):
+    subject_list = [
+        ('Computer Programming','CP'),
+        ('Machine Learning', 'ML'),
+        ('Data Science','DS'),
+        ('App Developement','AP'),
+        ('Web Developement','WD'),
+    ]
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name="faculty_profile")
+    subjects = models.CharField(max_length=50,choices=subject_list,blank=False,null=False)
+    salary = models.IntegerField(blank=False,null=False)
+    faculty_id = models.CharField(max_length=11, unique=True , editable=False)
+    gender = models.TextField(max_length=10 ,blank=False,null=False, choices = [('MALE' , 'Male'),('FEMALE' , 'Female')] )
+    address = models.TextField(blank=False,null=False)
+    aadhar_no = models.IntegerField(unique=True,blank=False,null=False)
+    date_of_birth = models.DateField(blank=False,null=False)
+    graduation_level = models.CharField(max_length=50,choices = [('UG','UG'),('PG','PG'),('PHD','PHD')],blank=False,null=False)
+    photo_faculty = models.ImageField(blank=True,null = True,upload_to='pf/')
+    updated_at = models.DateTimeField(auto_now_add=True)
+    creadted_at = models.DateTimeField(auto_now=True)
+    department = models.CharField(null=False,blank=False,choices=[('COMPUTER' , 'Computer') , ('CIVIL', 'Civil'), ('MECHANICAL' , 'Mechanical') ,('ELECTRICAL' ,'Electrical')])
