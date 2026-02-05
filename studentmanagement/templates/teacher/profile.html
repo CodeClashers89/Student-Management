@@ -1,0 +1,169 @@
+{% extends "base.html" %}
+    {%block title %} profile{% endblock %}
+
+
+     {% block style %}
+     <style>
+        h1{
+            background-color: rgb(194, 192, 192);
+            color:white;
+            text-align: center;
+            
+        }
+
+        .model{
+            width: 100%;
+            height: 780px;
+            background: #3C91F6;
+            
+            border-radius: 26px;
+            max-width: 100%;
+            
+           
+            align-content: center;
+            padding-bottom: 20px; 
+            padding-left: 20px; 
+            padding-right: 20px; 
+            
+            
+        } 
+        
+        body {
+            margin: 50px;
+            margin-top: 50px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;   /* left-right center */
+            align-items: center;       /* top-bottom center */
+            background: #f5f5f5;       /* optional */
+            padding-top: 50px;
+            padding-bottom: 50px;
+            padding-left: 200px;
+        }
+
+        
+       
+        button {
+        padding: 1.3em 3em;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 2.5px;
+        font-weight: 500;
+        color: #000;
+        background-color: #fff;
+        border: none;
+        border-radius: 45px;
+        box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease 0s;
+        cursor: pointer;
+        outline: none;
+        }
+
+        button:hover {
+        background-color: rgb(194, 192, 192);
+        box-shadow: 0px 15px 20px #6eabf7;
+        color: #fff;
+        transform: translateY(-7px);
+        }
+
+        button:active {
+        transform: translateY(-1px);
+        }
+
+        .fn{
+            color: white;
+        }
+
+        
+    </style>    
+{% endblock %}
+
+        
+
+    {% block content %}
+
+    <div class="model" >
+    <h1>YOUR PROFILE</h1>
+    <form>
+    <lable for="fn" >First Name :-</lable>
+    <input type="text" id="fn" name="fn"  placeholder="Enter your first name ">
+    <br></br>
+
+    <lable for="cn">Contact Number :-</lable>
+    <input  id="cn" name="cn" placeholder="Enter your contact number">
+    <br></br>
+
+    <label for="email">Enter your email:</label>
+    <input type="email" id="email" name="email">
+    <br></br>
+
+    <label for="subject">Choose a subjects:</label>
+    <select id="subject" name="subject">
+    <option value="English">English</option>
+    <option value="Computer">Computer</option>
+    </select>
+    <br></br>
+
+    <lable for="sa">Salary :-</lable>
+    <input  id="sa" name="sa" placeholder="$Enter your Salary$">
+    <br></br>
+
+    <lable for="fi">Faculty Id :-</lable>
+    <input  id="fi" name="fi" placeholder="Enter your faculty id">
+    <br></br>
+
+    <lable for="gender">Select your gender :-</lable>
+    <input type="radio" id="male" name="gender" value="male">
+    <label for="html">Male</label>
+    <input type="radio" id="female" name="gender" value="female">
+    <label for="css">Female</label>
+    <br></br>
+
+    <label for="ad">Address :-</lable>
+    <textarea name="ad" rows="10" cols="30" placeholder="Ender your address"></textarea>
+    <br></br>
+
+
+    <label for="quantity">Quantity (between 0 and 9):</label>
+    <input type="number" id="quantity" name="quantity" min="0" max="9">
+    <br></br>
+
+    <label for="birthday">DOB :-</label>
+    <input type="date" id="birthday" name="birthday">
+    <br></br>
+
+    <lable for="grd">Graduation :-</lable>
+    <input type="text" id="grd" name="grd">
+    <br></br>
+
+    <lable for="desi">Designation :-</lable>
+    <input type="text" id="desi" name="desi">
+    <br></br>
+
+    <form action="upload.php" method="post" enctype="multipart/form-data">
+    <label for="image_uploads">Choose image to upload:</label>
+    <input type="file" id="image_uploads" name="fileToUpload" accept="image/*" />
+    </form>
+    <br></br>
+
+    
+    <button type="submit">
+    <span class="text">submit</span>
+    <span class="blob"></span>
+    <span class="blob"></span>
+    <span class="blob"></span>
+    <span class="blob"></span>
+    </button>
+
+    <button type="reset">
+    <span class="text">Reset</span>
+    <span class="blob"></span>
+    <span class="blob"></span>
+    <span class="blob"></span>
+    <span class="blob"></span>
+    </button>
+
+
+    </form>
+    </div>
+{% endblock %}

@@ -10,3 +10,6 @@ def login(request):
 
 def newtest(request):
     return render(request, 'student/newtest.html')
+
+def profile(request):
+    return render(request, 'teacher/profile.html')
