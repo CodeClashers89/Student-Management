@@ -22,4 +22,6 @@ urlpatterns = [
     path('newtest', views.newtest, name='newtest'),
     path('login', views.login, name='login'),
     path('profile', views.profile, name='profile'),
+    path('result', views.result, name='result'),
+
 ]
