@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create new test</title>
-</head>
+{% extends "base.html" %}
+
+{% block title %}Create new test{% endblock %}
 <style>
 
 h1{
@@ -118,8 +114,10 @@ body{
 
 
 </style>
-<body>
-    <div class="card">
+
+
+{% block content %}
+<div class="card">
         <div class="container">
             <h2>Exam Details</h2><hr><br>
             <lable for="Test date">Test Date:</lable>
@@ -172,6 +170,5 @@ body{
         </div>
         
     </div>
-    
-</body>
-</html>
+
+{% endblock %}
