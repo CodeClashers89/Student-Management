@@ -26,7 +26,7 @@ class Student(models.Model):
     ]
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name="student_profile")
     enrollemet_no = models.CharField(max_length=11, unique=True , editable=False)
-    subjects = models.CharField(max_length=50,choices=subject_list,blank=False,null=False)
+    subjects = models.CharField(max_length=50,choices=subject_list,default='CP')
     date_of_birth = models.DateField(blank=False,null=False)
     gender = models.TextField(max_length=10 ,blank=False,null=False, choices = [('MALE' , 'Male'),('FEMALE' , 'Female')] )
     address = models.TextField(blank=False,null=False)
@@ -69,7 +69,7 @@ class Faculty(models.Model):
         ('Web Developement','WD'),
     ]
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name="faculty_profile")
-    subjects = models.CharField(max_length=50,choices=subject_list,blank=False,null=False)
+    subjects = models.CharField(max_length=50,choices=subject_list)
     salary = models.IntegerField(blank=False,null=False)
     faculty_id = models.CharField(max_length=11, unique=True , editable=False)
     gender = models.TextField(max_length=10 ,blank=False,null=False, choices = [('MALE' , 'Male'),('FEMALE' , 'Female')] )
@@ -99,7 +99,7 @@ class Faculty(models.Model):
 #Test and Exam Models
 class TestExam(models.Model):
     creator = models.ForeignKey(Faculty, on_delete=models.CASCADE,related_name='test_creator')
-    en_student = models.ForeignKey(Student,related_name='enrolled_student')
+    en_student = models.ManyToManyField(Student,related_name='enrolled_student')
     department = models.CharField(choices=[('COMPUTER' , 'Computer') , ('CIVIL', 'Civil'), ('MECHANICAL' , 'Mechanical') ,('ELECTRICAL' ,'Electrical')], null=False, blank=False)
     test_date = models.DateTimeField()
     syllabus = models.TextField(blank = False, null=False)
@@ -108,6 +108,8 @@ class TestExam(models.Model):
     te_type = models.CharField(choices=[('Test', 'test'),('Exam', 'exam')], null=False, blank=False,max_length=5,verbose_name='type')
     test_id = models.IntegerField(null=False, blank=False)
     
+
+
     def save(self, *args, **kwargs):
         if not self.test_id:
             last_test = TestExam.objects.all().order_by('id').last()
@@ -127,6 +129,6 @@ class TestExam(models.Model):
     def get_students(self):
         return Student.objects.filter(
             department = self.department,
-            te_ssubjects = self.en_student.
+            te_ssubjects = self.en_student.subjects,
         )
     
