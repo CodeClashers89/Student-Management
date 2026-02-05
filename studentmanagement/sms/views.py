@@ -13,3 +13,6 @@ def newtest(request):
 
 def profile(request):
     return render(request, 'teacher/profile.html')
+
+def result(request):
+    return render(request, 'student/result.html')
