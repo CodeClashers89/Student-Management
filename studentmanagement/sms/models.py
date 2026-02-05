@@ -122,7 +122,7 @@ class TestExam(models.Model):
         super().save(*args, **kwargs)
 
     def get_subjects(self):
-        return Faculty.objects.fiter(
+        return Faculty.objects.filter(
             te_fsubjects = self.creator.subjects,
         )
 
