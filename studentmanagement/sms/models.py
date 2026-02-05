@@ -108,8 +108,6 @@ class TestExam(models.Model):
     te_type = models.CharField(choices=[('Test', 'test'),('Exam', 'exam')], null=False, blank=False,max_length=5,verbose_name='type')
     test_id = models.IntegerField(null=False, blank=False)
     
-
-
     def save(self, *args, **kwargs):
         if not self.test_id:
             last_test = TestExam.objects.all().order_by('id').last()
@@ -122,14 +120,13 @@ class TestExam(models.Model):
         super().save(*args, **kwargs)
 
     def get_subjects(self):
-        return Faculty.objects.fiter(
+        return Faculty.objects.filter(
             te_fsubjects = self.creator.subjects,
         )
 
     def get_students(self):
-
         return Student.objects.filter(
             department = self.department,
-            te_ssubjects = self.en_student.o
+            te_ssubjects = self.en_student.
         )
     
