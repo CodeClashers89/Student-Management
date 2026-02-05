@@ -100,7 +100,7 @@ class Faculty(models.Model):
 class TestExam(models.Model):
     creator = models.ForeignKey(Faculty, on_delete=models.CASCADE,related_name='test_creator')
     en_student = models.ManyToManyField(Student,related_name='enrolled_student')
-    department = models.CharField(choices=[('COMPUTER' , 'Computer') , ('CIVIL', 'Civil'), ('MECHANICAL' , 'Mechanical') ,('ELECTRICAL' ,'Electrical')], null=False, blank=False)
+    department = models.CharField(max_length=15, choices=[('COMPUTER' , 'Computer') , ('CIVIL', 'Civil'), ('MECHANICAL' , 'Mechanical') ,('ELECTRICAL' ,'Electrical')], null=False, blank=False)
     test_date = models.DateTimeField()
     syllabus = models.TextField(blank = False, null=False)
     total_marks = models.IntegerField(null=False, blank=False)
@@ -131,4 +131,6 @@ class TestExam(models.Model):
             department = self.department,
             te_ssubjects = self.en_student.subjects,
         )
+
+        
     
