@@ -40,6 +40,7 @@ class Student(models.Model):
     semester = models.IntegerField(default=1)
     spi = models.DecimalField(decimal_places=2, max_digits=4, default=0)
     cpi = models.DecimalField(decimal_places=2, max_digits=4,default=0)
+    academic_calender = models.FileField(upload_to="ac/",null=True)
 
     def save(self, *args, **kwargs):
         if not self.enrollemet_no:
@@ -101,10 +102,13 @@ class Subjects(models.Model):
     details = models.CharField(max_length=150)
     subject_code = models.CharField(max_length=15,null=True)
 
+    def __str__(self):
+        return f'{self.name} -  {self.faculty}'
     
 #Test and Exam Models
 class TestExam(models.Model):
     creator = models.ForeignKey(Faculty, on_delete=models.CASCADE,related_name='test_creator')
+    subject = models.ForeignKey(Subjects, on_delete=models.CASCADE,related_name='test_subject')
     en_student = models.ManyToManyField(Student,related_name='enrolled_student')
     department = models.CharField(max_length=15,choices=[('COMPUTER' , 'Computer') , ('CIVIL', 'Civil'), ('MECHANICAL' , 'Mechanical') ,('ELECTRICAL' ,'Electrical')], null=False, blank=False)
     test_date = models.DateTimeField()
@@ -118,7 +122,7 @@ class TestExam(models.Model):
 
         return Student.objects.filter(
             department = self.department,
-            te_ssubjects = self.en_student.subjects,
+            te_ssubjects = self.subject,
         )
 
     def save(self, *args, **kwargs):
@@ -132,6 +136,8 @@ class TestExam(models.Model):
             self.test_id = f'{new_id:05d}'
         super().save(*args, **kwargs)
 
+    def __str__(self):
+        return f'{self.subject} -  {self.test_date}'
     
     class Meta:
         ordering = ['-test_date']
@@ -140,6 +146,5 @@ class Result(models.Model):
     test = models.OneToOneField(TestExam, on_delete=models.CASCADE)
     obtained_marks = models.IntegerField()
     studentr = models.ForeignKey(Student, on_delete=models.CASCADE)
-
-    
-    
+    def __str__(self):
+        return f'{self.test} - {self.studentr} - {self.obtained_marks}'
