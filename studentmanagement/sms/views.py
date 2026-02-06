@@ -18,8 +18,10 @@ def profile(request):
 
 def result(request):
     return render(request, 'student/result.html')
+def test(request):
+    return render(request, 'teacher/teacher_dashboard.html')
 
-<<<<<<< HEAD
+
 def register_student(request):
     if request.method == 'POST':
         form = StudentRegistrationForm(request.POST)
@@ -27,7 +29,3 @@ def register_student(request):
         form = StudentRegistrationForm()
     return render(request, 'register_student.html', {'form':form})
     
-=======
-def test(request):
-    return render(request, 'teacher/teacher_dashboard.html')
->>>>>>> 36730d4e1b70069855346ebc3c1ad78a8ea46b22
