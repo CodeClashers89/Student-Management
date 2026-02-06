@@ -18,4 +18,4 @@ def result(request):
     return render(request, 'student/result.html')
 
 def test(request):
-    return render(request, 'student/test_page.html')
+    return render(request, 'teacher/teacher_dashboard.html')
