@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from .models import CustomUser,Student,Faculty,Subjects,Result,TestExam
-from .forms import StudentRegistrationForm
+from .forms import *
 
 # Create your views here.
 def home(request):
@@ -29,3 +29,17 @@ def register_student(request):
         form = StudentRegistrationForm()
     return render(request, 'register_student.html', {'form':form})
     
+
+def register_faculty(request):
+    if request.method == 'POST':
+        form = FacultyRegistrationForm(request.POST)
+    else:
+        form = FacultyRegistrationForm()
+    return render(request, 'register_faculty.html', {'form':form})
+
+def create_test(request):
+    if request.method == 'POST':
+        form = CreateTestForm(request.POST)
+    else:
+        form = CreateTestForm()
+    return render(request, 'create_test.html', {'form':form})

@@ -95,10 +95,10 @@ class Faculty(models.Model):
         return f'{self.name} -  {self.faculty_id}'
     
 class Subjects(models.Model):
+    name = models.CharField(max_length = 20, null=False, blank=False)
     faculty = models.OneToOneField(Faculty, on_delete=models.DO_NOTHING)
     student = models.ForeignKey(Student, on_delete=models.DO_NOTHING)
     scredits = models.DecimalField(decimal_places=1, max_digits=4)
-    name = models.CharField(max_length = 20, null=False, blank=False)
     details = models.CharField(max_length=150)
     subject_code = models.CharField(max_length=15,null=True)
 
