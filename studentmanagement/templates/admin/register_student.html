@@ -4,8 +4,136 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+<style>
+    
+        /* Card */
+        .card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+
+        .card-header {
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem 1.5rem;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .card-body {
+            padding: 2rem;
+        }
+
+        /* Grid */
+        .grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .grid-2 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @media (max-width: 768px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Form */
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            font-size: 0.95rem;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(102, 205, 170, 0.15);
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        .form-help {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid var(--border-color);
+            margin: 2rem 0;
+        }
+
+        h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        /* Buttons */
+        .flex-gap {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.75rem;
+            border-radius: 6px;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+
+        .btn-success {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #e2e8f0;
+            color: var(--text-primary);
+        }
+
+        /* Errors */
+        .alert-error {
+            background: #fdecea;
+            border: 1px solid var(--danger-color);
+            color: var(--danger-color);
+            padding: 1rem;
+            border-radius: 6px;
+            margin-top: 1.5rem;
+        }
+    </style>
 </head>
 <body>
+    <div class="card">
+            <div class="card-header">Patient Registration Form</div>
+            <div class="card-body">
     <form method="post">
     {% csrf_token %}
       <h3>Account Information</h3>
@@ -106,5 +234,7 @@
                     </div>
                     </div>
   </form>
+  </div>
+  </div>
 </body>
 </html>
