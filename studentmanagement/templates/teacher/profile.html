@@ -70,7 +70,7 @@
         transform: translateY(-1px);
         }
 
-        .fn{
+        #fn, #cn, #email, #subject, #sa, #fi, #gen, #ad, #quantity, #birthday, #ged, #desi, #male, #female{
             color: white;
         }
 
@@ -85,59 +85,59 @@
     <div class="model" >
     <h1>YOUR PROFILE</h1>
     <form>
-    <lable for="fn" >First Name :-</lable>
-    <input type="text" id="fn" name="fn"  placeholder="Enter your first name ">
+    <lable for="fn" id="fn" >First Name :-</lable>
+    <input type="text" name="fn"  placeholder="Enter your first name ">
     <br></br>
 
-    <lable for="cn">Contact Number :-</lable>
-    <input  id="cn" name="cn" placeholder="Enter your contact number">
+    <lable for="cn"  id="cn">Contact Number :-</lable>
+    <input class="digit"  name="cn" placeholder="Enter your contact number" maxlength="10">
     <br></br>
 
-    <label for="email">Enter your email:</label>
-    <input type="email" id="email" name="email">
+    <label for="email" id="email">Enter your email:</label>
+    <input type="email"  name="email">
     <br></br>
 
-    <label for="subject">Choose a subjects:</label>
-    <select id="subject" name="subject">
+    <label for="subject" id="subject">Choose a subjects:</label>
+    <select  name="subject">
     <option value="English">English</option>
     <option value="Computer">Computer</option>
     </select>
     <br></br>
 
-    <lable for="sa">Salary :-</lable>
-    <input  id="sa" name="sa" placeholder="$Enter your Salary$">
+    <lable for="sa" id="sa">Salary :-</lable>
+    <input type="number" name="sa" placeholder="$Enter your Salary$">
     <br></br>
 
-    <lable for="fi">Faculty Id :-</lable>
-    <input  id="fi" name="fi" placeholder="Enter your faculty id">
+    <lable for="fi"  id="fi">Faculty Id :-</lable>
+    <input   name="fi" placeholder="Enter your faculty id">
     <br></br>
 
-    <lable for="gender">Select your gender :-</lable>
+    <lable for="gender" id="gen">Select your gender :-</lable>
     <input type="radio" id="male" name="gender" value="male">
-    <label for="html">Male</label>
+    <label for="html" id="male">Male</label>
     <input type="radio" id="female" name="gender" value="female">
-    <label for="css">Female</label>
+    <label for="css" id="female">Female</label>
     <br></br>
 
-    <label for="ad">Address :-</lable>
+    <label for="ad" id="ad">Address :-</lable>
     <textarea name="ad" rows="10" cols="30" placeholder="Ender your address"></textarea>
     <br></br>
 
 
-    <label for="quantity">Quantity (between 0 and 9):</label>
-    <input type="number" id="quantity" name="quantity" min="0" max="9">
+    <label for="quantity" id="quantity">Quantity (between 0 and 9):</label>
+    <input type="number"  name="quantity" min="0" max="9">
     <br></br>
 
-    <label for="birthday">DOB :-</label>
-    <input type="date" id="birthday" name="birthday">
+    <label for="birthday" id="birthday">DOB :-</label>
+    <input type="date"  name="birthday">
     <br></br>
 
-    <lable for="grd">Graduation :-</lable>
-    <input type="text" id="grd" name="grd">
+    <lable for="grd" id="grd">Graduation :-</lable>
+    <input type="text"  name="grd">
     <br></br>
 
-    <lable for="desi">Designation :-</lable>
-    <input type="text" id="desi" name="desi">
+    <lable for="desi" id="desi">Designation :-</lable>
+    <input type="text"  name="desi">
     <br></br>
 
     <form action="upload.php" method="post" enctype="multipart/form-data">
